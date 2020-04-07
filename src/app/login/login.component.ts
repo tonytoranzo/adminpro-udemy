@@ -57,9 +57,9 @@ export class LoginComponent implements OnInit {
 
       this.usuarioService
           .loginGoogle(token)
-          .subscribe( () => this.router.navigate(['/dashboard']) );
+          // .subscribe( () => this.router.navigate(['/dashboard']) );
           // Otra forma por si no funca el refresh bien de la página (el # es para que no recargue) :
-          // .subscribe( () => window.location.href = '#/dashboard' );
+          .subscribe( () => window.location.href = '#/dashboard' );
     });
 
   }

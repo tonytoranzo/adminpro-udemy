@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 // Rutas
 import { PAGES_ROUTES } from './pages.routes';
@@ -6,10 +8,12 @@ import { PAGES_ROUTES } from './pages.routes';
 // Módulos
 import { SharedModule } from '../shared/shared.module';
 
-import { FormsModule } from '@angular/forms';
 
 // ng2-charts
 import { ChartsModule } from 'ng2-charts';
+
+// Pipes Module
+import { PipesModule } from '../pipes/pipes.module';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -20,6 +24,7 @@ import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.co
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -31,7 +36,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         GraficoDonaComponent,
         AccountSettingsComponent,
         PromesasComponent,
-        RxjsComponent
+        RxjsComponent,
+        ProfileComponent
     ],
     exports: [
         DashboardComponent,
@@ -39,10 +45,12 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         Graficas1Component
     ],
     imports: [
+        CommonModule,
         SharedModule,
         FormsModule,
         PAGES_ROUTES,
-        ChartsModule
+        ChartsModule,
+        PipesModule
     ]
 })
 export class PagesModule { }
