@@ -52,8 +52,8 @@ export class RegisterComponent implements OnInit {
     }, { validators: this.sonDistintos( 'password', 'password2' ) });
 
     this.forma.setValue({
-      nombre: 'Tony Toranzo',
-      correo: 'tony@guud.com',
+      nombre: 'Test ',
+      correo: 'test@prueba.com',
       password: '123',
       password2: '123',
       condiciones: true
@@ -61,8 +61,6 @@ export class RegisterComponent implements OnInit {
   }
 
   registrarUsuario() {
-    console.log('Forma válida', this.forma.valid);
-
     if ( this.forma.invalid ) {
       return;
     }

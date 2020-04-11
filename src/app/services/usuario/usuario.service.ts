@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import swal from 'sweetalert';
@@ -15,11 +14,13 @@ import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 })
 export class UsuarioService {
 
-  private usuarioSubject = new BehaviorSubject<Usuario>(null);
-  usuario$ = this.usuarioSubject.asObservable();
+  usuario: Usuario;
   token: string;
 
-  constructor( public http: HttpClient, public router: Router, public subirArchivoService: SubirArchivoService ) {
+  constructor(
+    public http: HttpClient,
+    public router: Router,
+    public subirArchivoService: SubirArchivoService ) {
     this.cargarStorage();
   }
 
@@ -30,10 +31,10 @@ export class UsuarioService {
   cargarStorage() {
     if (localStorage.getItem('token')) {
       this.token = localStorage.getItem('token');
-      this.usuarioSubject.next(JSON.parse(localStorage.getItem('usuario')));
+      this.usuario = JSON.parse(localStorage.getItem('usuario'));
     } else {
       this.token = '';
-      this.usuarioSubject.next(null);
+      this.usuario = null;
     }
   }
 
@@ -42,12 +43,12 @@ export class UsuarioService {
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
-    this.usuarioSubject.next(usuario);
+    this.usuario = usuario;
     this.token = token;
   }
 
   logout() {
-    this.usuarioSubject.next(null);
+    this.usuario = null;
     this.token = '';
 
     localStorage.removeItem('token');
@@ -111,9 +112,12 @@ export class UsuarioService {
           .put( url, usuario )
           .pipe(
             map( (resp: any) => {
-              const usuarioDb: Usuario = resp.usuario;
-              this.guardarStorage(usuarioDb._id, this.token, usuarioDb);
-              swal('Usuario actualizado', usuarioDb.nombre, 'success');
+              if ( usuario._id === this.usuario._id ) {
+                const usuarioDb: Usuario = resp.usuario;
+                this.guardarStorage(usuarioDb._id, this.token, usuarioDb);
+              }
+
+              swal('Usuario actualizado', usuario.nombre, 'success');
 
               return true;
             })
@@ -135,5 +139,36 @@ export class UsuarioService {
         .catch( resp => {
           console.log('Resp', resp);
         });
+  }
+
+  cargarUsuarios( desde: number = 0 ) {
+    const url = URL_SERVICIOS + '/usuario?desde=' + desde;
+
+    return this.http.get( url );
+  }
+
+  buscarUsuarios( termino: string ) {
+
+    const url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
+
+    return this.http
+               .get( url )
+               .pipe(
+                 map( (resp: any) => resp.usuarios )
+               );
+  }
+
+  borrarUsuario( idUsuario: string ) {
+
+    const url = URL_SERVICIOS + '/usuario/' + idUsuario + '?token=' + this.token;
+
+    return this.http
+               .delete( url )
+               .pipe(
+                 map( resp => {
+                   swal('Usuario borrado', 'El usuario ha sido eliminado correctamente', 'success');
+                   return true;
+                 })
+               );
   }
 }

@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   constructor( public usuarioService: UsuarioService ) { }
 
   ngOnInit(): void {
-    this.usuarioService.usuario$.subscribe( user => this.usuario = user );
+    this.usuario = this.usuarioService.usuario;
   }
 
   guardar( usuario: Usuario ) {
@@ -49,13 +49,12 @@ export class ProfileComponent implements OnInit {
     this.imagenSubir = archivo;
 
     const reader = new FileReader();
-    const urlImagenTemp = reader.readAsDataURL(archivo);
-
-    reader.onloadend = () => this.imagenTemp = reader.result.toString();
+    reader.readAsDataURL(archivo);
+    reader.onloadend = () => this.imagenTemp = reader.result as string;
 
   }
 
-  cambiarImagen(){
+  cambiarImagen() {
     this.usuarioService.cambiarImagen( this.imagenSubir, this.usuario._id );
   }
 

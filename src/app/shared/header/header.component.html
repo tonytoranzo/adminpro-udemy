@@ -106,31 +106,29 @@
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <div *ngIf="usuario$ | async as usuario">
-                        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img [src]="usuario.img | imagen" alt="user" class="profile-pic" />
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right animated fadeIn">
-                            <ul class="dropdown-user">
-                                <li>
-                                    <div class="dw-user-box align-content-center">
-                                        <div class="u-img"><img [src]="usuario.img | imagen" alt="user"></div>
-                                        <div class="u-text">
-                                            <h4>{{ usuario.nombre }}</h4>
-                                            <p class="text-muted">{{ usuario.email }}</p>
-                                            <a routerLink="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
-                                    </div>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li><a routerLink="/perfil"><i class="ti-user"></i> Perfil</a></li>
-                                <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                                <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a routerLink="/account-settings"><i class="ti-settings"></i> Account Setting</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a (click)="usuarioService.logout()" class="pointer"><i class="fa fa-power-off"></i> Logout</a></li>
-                            </ul>
-                        </div>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img [src]="usuario.img | imagen" alt="user" class="profile-pic" />
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right animated fadeIn">
+                        <ul class="dropdown-user">
+                            <li>
+                                <div class="dw-user-box align-content-center">
+                                    <div class="u-img"><img [src]="usuario.img | imagen" alt="user"></div>
+                                    <div class="u-text">
+                                        <h4>{{ usuario.nombre }}</h4>
+                                        <p class="text-muted">{{ usuario.email }}</p>
+                                        <a routerLink="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
+                                </div>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a routerLink="/perfil"><i class="ti-user"></i> Perfil</a></li>
+                            <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
+                            <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a routerLink="/account-settings"><i class="ti-settings"></i> Account Setting</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a (click)="usuarioService.logout()" class="pointer"><i class="fa fa-power-off"></i> Logout</a></li>
+                        </ul>
                     </div>
                 </li>
             </ul>
