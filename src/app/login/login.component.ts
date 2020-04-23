@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit {
       const profile = googleUser.getBasicProfile();
       const token = googleUser.getAuthResponse().id_token;
 
-      console.log('Profile', profile);
-      console.log('Token', token);
+      // console.log('Profile', profile);
+      // console.log('Token', token);
 
       this.usuarioService
           .loginGoogle(token)
