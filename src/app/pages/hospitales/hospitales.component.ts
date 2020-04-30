@@ -5,8 +5,6 @@ import { HospitalService } from '../../services/hospital/hospital.service';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 import swal from 'sweetalert';
 
-// declare var swal: any;
-
 @Component({
   selector: 'app-hospitales',
   templateUrl: './hospitales.component.html',

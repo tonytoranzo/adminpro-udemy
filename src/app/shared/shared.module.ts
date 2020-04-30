@@ -9,13 +9,15 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumsComponent } from './breadcrums/breadcrums.component';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 
 @NgModule({
     declarations: [
         NopagefoundComponent,
         HeaderComponent,
         SidebarComponent,
-        BreadcrumsComponent
+        BreadcrumsComponent,
+        ModalUploadComponent
     ],
     imports: [
         RouterModule,
@@ -26,7 +28,8 @@ import { BreadcrumsComponent } from './breadcrums/breadcrums.component';
         NopagefoundComponent,
         HeaderComponent,
         SidebarComponent,
-        BreadcrumsComponent
+        BreadcrumsComponent,
+        ModalUploadComponent
     ]
 })
 export class SharedModule { }

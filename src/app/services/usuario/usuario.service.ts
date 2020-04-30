@@ -27,6 +27,29 @@ export class UsuarioService {
     this.cargarStorage();
   }
 
+  renuevaToken() {
+
+    const url = URL_SERVICIOS + '/login/renuevatoken?token=' + this.token;
+
+    return this.http
+               .get( url )
+               .pipe(
+                 map( (resp: any) => {
+                   this.token = resp.token;
+                   localStorage.setItem('token', this.token);
+                   console.log('Token renovado');
+
+                   return true;
+                 }),
+                 catchError( err => {
+                   this.router.navigate(['/login']);
+                   swal('No se pudo renovar token', 'No fue posible renovar token', 'error');
+
+                   return throwError(err);
+                 })
+               );
+  }
+
   estaLogueado() {
     return this.token.length > 5;
   }
